@@ -1,0 +1,15 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Package",
+            "type": "go",
+            "request": "launch", // 启动请求
+            "mode": "debug", // 指定调试模式
+            "program": "${fileDirname}",  // 指定需要调试的程序
+        }
+    ]
+}
