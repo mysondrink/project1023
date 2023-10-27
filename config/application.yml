@@ -1,3 +1,5 @@
+server:
+ port: 1016
 datasource:
  host: localhost
  port: 3306

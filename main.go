@@ -24,6 +24,7 @@ func main() {
 	panic(r.Run())
 }
 
+// 读取配置文件
 func InitConfig() {
 	workDir, _ := os.Getwd()
 	viper.SetConfigName("application")
