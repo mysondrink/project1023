@@ -7,6 +7,7 @@ import (
 	"assemblyline/project1023/model"
 	"assemblyline/project1023/response"
 	"assemblyline/project1023/util"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -18,7 +19,7 @@ import (
 // 注册事务
 func Register(ctx *gin.Context) {
 	db := common.GetDB()
-	// 使用结构体获取请求的参数
+	// gin的绑定获取参数
 	var requestUser = model.UserTable{}
 	ctx.Bind(&requestUser)
 
@@ -30,6 +31,8 @@ func Register(ctx *gin.Context) {
 	// name := ctx.PostForm("name")
 	// telephone := ctx.PostForm("telephone")
 	// password := ctx.PostForm("password")
+
+	fmt.Println(name, telephone, password)
 
 	// 数据验证
 	if len(telephone) != 11 {
@@ -83,26 +86,30 @@ func Register(ctx *gin.Context) {
 // 登录事务
 func Login(ctx *gin.Context) {
 	db := common.GetDB()
+	var requestUser = model.UserTable{}
+	ctx.Bind(&requestUser)
+
 	// 获取参数
 	// name := ctx.PostForm("name")
-	telephone := ctx.PostForm("telephone")
-	password := ctx.PostForm("password")
+	telephone := requestUser.Telephone
+	password := requestUser.Password
 
 	// 数据验证
-	if len(telephone) != 11 {
-		response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "手机号必须为11位")
-		return
-	}
-	if len(password) < 6 {
-		response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "密码大于6位")
-		return
-	}
+	// if len(telephone) != 11 {
+	// 	response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "手机号必须为11位")
+	// 	return
+	// }
+	// if len(password) < 6 {
+	// 	response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "密码大于6位")
+	// 	return
+	// }
 
 	//判断手机号是否存在
 	var usertable model.UserTable
-	db.Where("telephone = ?", telephone).First(&usertable)
+	db.Unscoped().Where("telephone = ?", telephone).First(&usertable)
 	if usertable.ID == 0 {
 		response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "用户不存在")
+		return
 	}
 
 	// 判断密码是否正确
@@ -129,9 +136,27 @@ func Info(ctx *gin.Context) {
 	response.Success(ctx, gin.H{"user": dto.ToUserDto(user.(model.UserTable))}, "ok")
 }
 
+// 验证电话是否存在
 func isTelephoneExist(db *gorm.DB, telephone string) bool {
 	var UserTable model.UserTable
-	db.Where("telephone = ?", telephone).First(&UserTable)
+	db.Unscoped().Where("telephone = ?", telephone).First(&UserTable)
 
 	return UserTable.ID != 0
+}
+
+// 获取信息业务
+func GetInfo(ctx *gin.Context) {
+	db := common.GetDB()
+	// 获取参数
+	var request = model.Trail{}
+	ctx.Bind(&request)
+	trail_name := request.Trail_name
+
+	// 获取id
+	var trailtable model.Trail
+	result := db.Unscoped().Where("trail_name = ?", trail_name).Find(&trailtable)
+	// 返回信息
+	fmt.Println(result.RowsAffected)
+	fmt.Println(trailtable)
+	response.Success(ctx, gin.H{"trail_name": dto.ToTrailDto(trailtable)}, "查询成功")
 }

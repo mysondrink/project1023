@@ -36,9 +36,9 @@ func InitDB() *gorm.DB {
 	// 连接数据库
 	db, err := gorm.Open(mysql.Open(args), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
-			TablePrefix: "t_", // table name prefix, table for `User` would be `t_users`
-			// SingularTable: true,  // use singular table name, table for `User` would be `user` with this option enabled
-			NoLowerCase: true, // skip the snake_casing of names
+			TablePrefix:   "t_",  // table name prefix, table for `User` would be `t_users`
+			SingularTable: true,  // use singular table name, table for `User` would be `user` with this option enabled
+			NoLowerCase:   false, // skip the snake_casing of names
 		},
 	})
 	// db, err := gorm.Open(driverName, args)

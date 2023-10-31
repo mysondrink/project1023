@@ -36,7 +36,7 @@ func AuthMiddleware() gin.HandlerFunc {
 		userId := claims.UserId
 		DB := common.GetDB()
 		var user model.UserTable
-		DB.First(&user, userId)
+		DB.Unscoped().First(&user, userId)
 
 		// 判断是否获取到用户
 		if user.ID == 0 {
