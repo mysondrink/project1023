@@ -9,19 +9,22 @@ type UserDto struct {
 }
 
 type TrailDto struct {
-	Start_time  string `json:"start_time"`
-	End_time    string `json:"end_time"`
-	Trail_name  string `json:"trail_name"`
-	Module_type string `json:"module_type"`
-	Trail_type  string `json:"trail_type"`
-	Trail_id    uint   `json:"trail_id"`
-	Car_id      uint   `json:"car_id"`
-	Car_type    string `json:"car_type"`
-	Status      string `json:"status"`
-	Create_time string `json:"create_time"`
-	Update_time string `json:"update_time"`
-	Charge_area uint   `json:"charge_area"`
-	Tran_area   uint   `json:"tran_area"`
+	Controller_id   string `json:"controller_id"`
+	Controller_type string `json:"controller_type"`
+	Start_time      string `json:"start_time"`
+	End_time        string `json:"end_time"`
+	Trail_name      string `json:"trail_name"`
+	Trail_id        uint   `json:"trail_id"`
+	Trail_type      string `json:"trail_type"`
+	Module_name     string `json:"module_name"`
+	Module_id       uint   `json:"module_id"`
+	Module_type     string `json:"module_type"`
+	Car_id          uint   `json:"car_id"`
+	Create_time     string `json:"create_time"`
+	Update_time     string `json:"update_time"`
+	Charge_area     uint   `json:"charge_area"`
+	Tran_area       uint   `json:"tran_area"`
+	Status          string `json:"status"`
 }
 
 func ToUserDto(user model.UserTable) UserDto {
@@ -33,18 +36,21 @@ func ToUserDto(user model.UserTable) UserDto {
 
 func ToTrailDto(trail model.Trail) TrailDto {
 	return TrailDto{
-		Start_time:  trail.Start_time,
-		End_time:    trail.End_time,
-		Trail_name:  trail.Trail_name,
-		Module_type: trail.Module_type,
-		Trail_type:  trail.Trail_type,
-		Trail_id:    trail.Trail_id,
-		Car_id:      trail.Car_id,
-		Car_type:    trail.Car_type,
-		Status:      trail.Status,
-		Create_time: trail.Create_time,
-		Update_time: trail.Update_time,
-		Charge_area: trail.Charge_area,
-		Tran_area:   trail.Tran_area,
+		Controller_type: trail.Controller_type,
+		Controller_id:   trail.Controller_id,
+		Start_time:      trail.Start_time,
+		End_time:        trail.End_time,
+		Trail_name:      trail.Trail_name,
+		Trail_id:        trail.Trail_id,
+		Trail_type:      trail.Trail_type,
+		Module_name:     trail.Module_name,
+		Module_id:       trail.Module_id,
+		Module_type:     trail.Module_type,
+		Car_id:          trail.Car_id,
+		Create_time:     trail.Create_time,
+		Update_time:     trail.Update_time,
+		Charge_area:     trail.Charge_area,
+		Tran_area:       trail.Tran_area,
+		Status:          trail.Status,
 	}
 }

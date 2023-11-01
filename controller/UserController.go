@@ -150,13 +150,13 @@ func GetInfo(ctx *gin.Context) {
 	// 获取参数
 	var request = model.Trail{}
 	ctx.Bind(&request)
-	trail_name := request.Trail_name
+	controller_type := request.Controller_type
 
 	// 获取id
 	var trailtable model.Trail
-	result := db.Unscoped().Where("trail_name = ?", trail_name).Find(&trailtable)
+	result := db.Unscoped().Where("controller_type = ?", controller_type).Find(&trailtable)
 	// 返回信息
 	fmt.Println(result.RowsAffected)
 	fmt.Println(trailtable)
-	response.Success(ctx, gin.H{"trail_name": dto.ToTrailDto(trailtable)}, "查询成功")
+	response.Success(ctx, gin.H{"data": dto.ToTrailDto(trailtable)}, "查询成功")
 }
