@@ -148,15 +148,17 @@ func isTelephoneExist(db *gorm.DB, telephone string) bool {
 func GetInfo(ctx *gin.Context) {
 	db := common.GetDB()
 	// 获取参数
-	var request = model.Trail{}
+	var request = model.Controller{}
 	ctx.Bind(&request)
 	controller_type := request.Controller_type
 
 	// 获取id
-	var trailtable model.Trail
-	result := db.Unscoped().Where("controller_type = ?", controller_type).Find(&trailtable)
+	var controllerTable []model.Controller
+	if result := db.Where("controller_type = ?", controller_type).Find(&controllerTable); result.Error != nil {
+		response.Response(ctx, http.StatusBadRequest, 400, nil, "查询失败")
+		return
+	}
 	// 返回信息
-	fmt.Println(result.RowsAffected)
-	fmt.Println(trailtable)
-	response.Success(ctx, gin.H{"data": dto.ToTrailDto(trailtable)}, "查询成功")
+	// fmt.Println(result.RowsAffected)
+	response.Success(ctx, gin.H{"data": dto.ToControllerDto(controllerTable)}, "查询成功")
 }

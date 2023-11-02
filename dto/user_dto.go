@@ -8,7 +8,7 @@ type UserDto struct {
 	Telephone string `json:"telephone"`
 }
 
-type TrailDto struct {
+type ControllerDto struct {
 	Controller_id   string `json:"controller_id"`
 	Controller_type string `json:"controller_type"`
 	Start_time      string `json:"start_time"`
@@ -23,7 +23,7 @@ type TrailDto struct {
 	Create_time     string `json:"create_time"`
 	Update_time     string `json:"update_time"`
 	Charge_area     uint   `json:"charge_area"`
-	Tran_area       uint   `json:"tran_area"`
+	Trans_area      uint   `json:"trans_area"`
 	Status          string `json:"status"`
 }
 
@@ -34,23 +34,30 @@ func ToUserDto(user model.UserTable) UserDto {
 	}
 }
 
-func ToTrailDto(trail model.Trail) TrailDto {
-	return TrailDto{
-		Controller_type: trail.Controller_type,
-		Controller_id:   trail.Controller_id,
-		Start_time:      trail.Start_time,
-		End_time:        trail.End_time,
-		Trail_name:      trail.Trail_name,
-		Trail_id:        trail.Trail_id,
-		Trail_type:      trail.Trail_type,
-		Module_name:     trail.Module_name,
-		Module_id:       trail.Module_id,
-		Module_type:     trail.Module_type,
-		Car_id:          trail.Car_id,
-		Create_time:     trail.Create_time,
-		Update_time:     trail.Update_time,
-		Charge_area:     trail.Charge_area,
-		Tran_area:       trail.Tran_area,
-		Status:          trail.Status,
+func ToControllerDto(controller []model.Controller) []ControllerDto {
+	// for item := range controller {
+	// }
+	var result []ControllerDto
+	for _, item := range controller {
+		template := ControllerDto{
+			Controller_type: item.Controller_type,
+			Controller_id:   item.Controller_id,
+			Start_time:      item.Start_time,
+			End_time:        item.End_time,
+			Trail_name:      item.Trail_name,
+			Trail_id:        item.Trail_id,
+			Trail_type:      item.Trail_type,
+			Module_name:     item.Module_name,
+			Module_id:       item.Module_id,
+			Module_type:     item.Module_type,
+			Car_id:          item.Car_id,
+			Create_time:     item.Create_time,
+			Update_time:     item.Update_time,
+			Charge_area:     item.Charge_area,
+			Trans_area:      item.Trans_area,
+			Status:          item.Status,
+		}
+		result = append(result, template)
 	}
+	return result
 }

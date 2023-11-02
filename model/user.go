@@ -12,7 +12,7 @@ type UserTable struct {
 	Password  string `gorm:"size:255;not null"`
 }
 
-type Trail struct {
+type Controller struct {
 	gorm.Model
 	Controller_id   string `gorm:"type:varchar(255);not null"`
 	Controller_type string `gorm:"type:varchar(255);not null"`
@@ -28,6 +28,6 @@ type Trail struct {
 	Create_time     string `gorm:"type:varchar(255);not null"`
 	Update_time     string `gorm:"type:varchar(255);not null"`
 	Charge_area     uint
-	Tran_area       uint
+	Trans_area      uint
 	Status          string `gorm:"type:varchar(255);not null"`
 }
