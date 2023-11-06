@@ -144,7 +144,7 @@ func isTelephoneExist(db *gorm.DB, telephone string) bool {
 	return UserTable.ID != 0
 }
 
-// 获取信息业务
+// 获取轨道信息业务
 func GetInfo(ctx *gin.Context) {
 	db := common.GetDB()
 	// 获取参数

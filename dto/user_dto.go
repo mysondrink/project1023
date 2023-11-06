@@ -25,6 +25,9 @@ type ControllerDto struct {
 	Charge_area     uint   `json:"charge_area"`
 	Trans_area      uint   `json:"trans_area"`
 	Status          string `json:"status"`
+	Tx_status       string `json:"tx_status"`
+	Rx_status       string `json:"rx_status"`
+	Rates           string `json:"rates"`
 }
 
 func ToUserDto(user model.UserTable) UserDto {
@@ -56,6 +59,9 @@ func ToControllerDto(controller []model.Controller) []ControllerDto {
 			Charge_area:     item.Charge_area,
 			Trans_area:      item.Trans_area,
 			Status:          item.Status,
+			Tx_status:       item.Tx_status,
+			Rx_status:       item.Rx_status,
+			Rates:           item.Rates,
 		}
 		result = append(result, template)
 	}

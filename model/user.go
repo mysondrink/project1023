@@ -30,4 +30,7 @@ type Controller struct {
 	Charge_area     uint
 	Trans_area      uint
 	Status          string `gorm:"type:varchar(255);not null"`
+	Tx_status       string `gorm:"type:varchar(255);not null"`
+	Rx_status       string `gorm:"type:varchar(255);not null"`
+	Rates           string `gorm:"type:varchar(255);not null"`
 }
