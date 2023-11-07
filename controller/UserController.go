@@ -162,3 +162,26 @@ func GetInfo(ctx *gin.Context) {
 	// fmt.Println(result.RowsAffected)
 	response.Success(ctx, gin.H{"data": dto.ToControllerDto(controllerTable)}, "查询成功")
 }
+
+func GetCarInfo(ctx *gin.Context) {
+	db := common.GetDB()
+	// 获取参数
+	var request = model.Car{}
+	ctx.Bind(&request)
+	// car_id := request.Car_id
+
+	// 获取id
+	var carTable []model.Car
+	if result := db.Find(&carTable); result.Error != nil {
+		response.Response(ctx, http.StatusBadRequest, 400, nil, "查询失败")
+		return
+	}
+	// if result := db.Where("car_id = ?", car_id).Find(&controllerTable); result.Error != nil {
+	// 	response.Response(ctx, http.StatusBadRequest, 400, nil, "查询失败")
+	// 	return
+	// }
+
+	// 返回信息
+	// fmt.Println(result.RowsAffected)
+	response.Success(ctx, gin.H{"data": dto.ToCarDto(carTable)}, "查询成功")
+}

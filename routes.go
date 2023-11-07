@@ -16,5 +16,6 @@ func CollectRoute(r *gin.Engine) *gin.Engine {
 	r.GET("/api/auth/info", middleware.AuthMiddleware(), controller.Info)
 	r.GET("/api/trail/info", controller.GetInfo)
 	r.GET("/api/module/info", controller.GetInfo)
+	r.GET("/api/car/info", controller.GetCarInfo)
 	return r
 }

@@ -34,3 +34,28 @@ type Controller struct {
 	Rx_status       string `gorm:"type:varchar(255);not null"`
 	Rates           string `gorm:"type:varchar(255);not null"`
 }
+
+type Car struct {
+	gorm.Model
+	Start_time    string `gorm:"type:varchar(255);not null"`
+	End_time      string `gorm:"type:varchar(255);not null"`
+	Car_name      string `gorm:"type:varchar(255);not null"`
+	Car_id        uint
+	Car_type      string `gorm:"type:varchar(255);not null"`
+	Sample_status string `gorm:"type:varchar(255);not null"`
+	Create_time   string `gorm:"type:varchar(255);not null"`
+	Update_time   string `gorm:"type:varchar(255);not null"`
+	Charge_area   uint
+	Trans_area    uint
+	Status        string `gorm:"type:varchar(255);not null"`
+	Sample_name   string `gorm:"type:varchar(255);not null"`
+	Sample_type   string `gorm:"type:varchar(255);not null"`
+	Sample_id     uint
+	Sample_code   uint
+	Power         uint
+	Targe         string `gorm:"type:varchar(255);not null"`
+	Position      string `gorm:"type:varchar(255);not null"`
+	Valid         uint
+	Username      string `gorm:"type:varchar(255);not null"`
+	Controller_id string `gorm:"type:varchar(255);not null"`
+}
