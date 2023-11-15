@@ -9,7 +9,7 @@ import (
 
 func CORSMiddleware() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		// 设置域名信息
+		// 设置域名信息，包括可以访问的域名信息，“*”为全部访问域名
 		ctx.Writer.Header().Set("Access-control-Allow-Origin", "http://localhost:8080")
 		// 设置缓存时间
 		ctx.Writer.Header().Set("Access-control-MAx-Age-Origin", "86400")
