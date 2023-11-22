@@ -17,5 +17,7 @@ func CollectRoute(r *gin.Engine) *gin.Engine {
 	r.GET("/api/trail/info", controller.GetInfo)
 	r.GET("/api/module/info", controller.GetInfo)
 	r.GET("/api/car/info", controller.GetCarInfo)
+	r.GET("/api/car/column", controller.GetCarInfo)
+	r.GET("/api/layout/info", controller.GetToyInfo)
 	return r
 }

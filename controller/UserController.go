@@ -145,6 +145,7 @@ func isTelephoneExist(db *gorm.DB, telephone string) bool {
 }
 
 // 获取轨道信息业务
+// 获取模块信息业务
 func GetInfo(ctx *gin.Context) {
 	db := common.GetDB()
 	// 获取参数
@@ -163,6 +164,8 @@ func GetInfo(ctx *gin.Context) {
 	response.Success(ctx, gin.H{"data": dto.ToControllerDto(controllerTable)}, "查询成功")
 }
 
+// 运输车信息业务
+// 等待队列信息业务
 func GetCarInfo(ctx *gin.Context) {
 	db := common.GetDB()
 	// 获取参数
@@ -184,4 +187,28 @@ func GetCarInfo(ctx *gin.Context) {
 	// 返回信息
 	// fmt.Println(result.RowsAffected)
 	response.Success(ctx, gin.H{"data": dto.ToCarDto(carTable)}, "查询成功")
+}
+
+// 布局小车位置信息业务
+func GetToyInfo(ctx *gin.Context) {
+	db := common.GetDB()
+	// 获取参数
+	var request = model.Toy{}
+	ctx.Bind(&request)
+	// car_id := request.Car_id
+
+	// 获取id
+	var toyTable []model.Toy
+	if result := db.Find(&toyTable); result.Error != nil {
+		response.Response(ctx, http.StatusBadRequest, 400, nil, "查询失败")
+		return
+	}
+	// if result := db.Where("car_id = ?", car_id).Find(&controllerTable); result.Error != nil {
+	// 	response.Response(ctx, http.StatusBadRequest, 400, nil, "查询失败")
+	// 	return
+	// }
+
+	// 返回信息
+	// fmt.Println(result.RowsAffected)
+	response.Success(ctx, gin.H{"data": dto.ToToyDto(toyTable)}, "查询成功")
 }

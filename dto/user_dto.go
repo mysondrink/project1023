@@ -1,11 +1,16 @@
 // 用户数据传输对象定义
 package dto
 
-import "assemblyline/project1023/model"
+import (
+	"assemblyline/project1023/model"
+	"time"
+)
 
 type UserDto struct {
-	Name      string `json:"name"`
-	Telephone string `json:"telephone"`
+	Name      string    `json:"name"`
+	Telephone string    `json:"telephone"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 type ControllerDto struct {
@@ -20,38 +25,72 @@ type ControllerDto struct {
 	Module_id       uint   `json:"module_id"`
 	Module_type     string `json:"module_type"`
 	Car_id          uint   `json:"car_id"`
-	Create_time     string `json:"create_time"`
-	Update_time     string `json:"update_time"`
-	Charge_area     uint   `json:"charge_area"`
-	Trans_area      uint   `json:"trans_area"`
-	Status          string `json:"status"`
-	Tx_status       string `json:"tx_status"`
-	Rx_status       string `json:"rx_status"`
-	Rates           string `json:"rates"`
+	// Create_time     string `json:"create_time"`
+	// Update_time     string `json:"update_time"`
+	Charge_area uint      `json:"charge_area"`
+	Trans_area  uint      `json:"trans_area"`
+	Status      string    `json:"status"`
+	Tx_status   string    `json:"tx_status"`
+	Rx_status   string    `json:"rx_status"`
+	Rates       string    `json:"rates"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
 }
 
 type CarDto struct {
-	Start_time    string `json:"start_time"`
-	End_time      string `json:"end_time"`
-	Car_name      string `json:"car_name"`
-	Car_id        uint   `json:"car_id"`
-	Car_type      string `json:"car_type"`
-	Create_time   string `json:"create_time"`
-	Update_time   string `json:"update_time"`
-	Charge_area   uint   `json:"charge_area"`
-	Trans_area    uint   `json:"trans_area"`
-	Status        string `json:"status"`
-	Sample_name   string `json:"sample_name"`
-	Sample_status string `json:"sample_status"`
-	Sample_type   string `json:"sample_type"`
-	Sample_id     uint   `json:"sample_id"`
-	Sample_code   uint   `json:"sample_code"`
-	Power         uint   `json:"power"`
-	Targe         string `json:"targe"`
-	Position      string `json:"position"`
-	Valid         uint   `json:"valid"`
-	Username      string `json:"username"`
-	Controller_id string `json:"controller_id"`
+	Start_time string `json:"start_time"`
+	End_time   string `json:"end_time"`
+	Car_name   string `json:"car_name"`
+	Car_id     uint   `json:"car_id"`
+	Car_type   string `json:"car_type"`
+	// Create_time   string `json:"create_time"`
+	// Update_time   string `json:"update_time"`
+	Charge_area   uint      `json:"charge_area"`
+	Trans_area    uint      `json:"trans_area"`
+	Status        string    `json:"status"`
+	Sample_name   string    `json:"sample_name"`
+	Sample_status string    `json:"sample_status"`
+	Sample_type   string    `json:"sample_type"`
+	Sample_id     uint      `json:"sample_id"`
+	Sample_code   uint      `json:"sample_code"`
+	Power         uint      `json:"power"`
+	Target        string    `json:"target"`
+	Position      string    `json:"position"`
+	Valid         uint      `json:"valid"`
+	Username      string    `json:"username"`
+	Controller_id string    `json:"controller_id"`
+	CreatedAt     time.Time `json:"created_at"`
+	UpdatedAt     time.Time `json:"updated_at"`
+}
+
+type ToyDto struct {
+	Start_time string `json:"start_time"`
+	End_time   string `json:"end_time"`
+	// Car_name   string `json:"car_name"`
+	Toy_id     uint `json:"toy_id"`
+	Color      uint `json:"color"`
+	Default    uint `json:"default"`
+	Position_x uint `json:"position_x"`
+	Position_y uint `json:"position_y"`
+	// Car_type   string `json:"car_type"`
+	// Create_time   string `json:"create_time"`
+	// Update_time   string `json:"update_time"`
+	// Charge_area   uint      `json:"charge_area"`
+	// Trans_area    uint      `json:"trans_area"`
+	// Status        string    `json:"status"`
+	// Sample_name   string    `json:"sample_name"`
+	// Sample_status string    `json:"sample_status"`
+	// Sample_type   string    `json:"sample_type"`
+	// Sample_id     uint      `json:"sample_id"`
+	// Sample_code   uint      `json:"sample_code"`
+	// Power         uint      `json:"power"`
+	// Target        string    `json:"target"`
+	// Position      string    `json:"position"`
+	// Valid         uint      `json:"valid"`
+	// Username      string    `json:"username"`
+	// Controller_id string    `json:"controller_id"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 func ToUserDto(user model.UserTable) UserDto {
@@ -78,8 +117,8 @@ func ToControllerDto(controller []model.Controller) []ControllerDto {
 			Module_id:       item.Module_id,
 			Module_type:     item.Module_type,
 			Car_id:          item.Car_id,
-			Create_time:     item.Create_time,
-			Update_time:     item.Update_time,
+			CreatedAt:       item.CreatedAt,
+			UpdatedAt:       item.UpdatedAt,
 			Charge_area:     item.Charge_area,
 			Trans_area:      item.Trans_area,
 			Status:          item.Status,
@@ -104,8 +143,8 @@ func ToCarDto(car []model.Car) []CarDto {
 			Car_id:        item.Car_id,
 			Car_type:      item.Car_type,
 			Sample_status: item.Sample_status,
-			Create_time:   item.Create_time,
-			Update_time:   item.Update_time,
+			CreatedAt:     item.CreatedAt,
+			UpdatedAt:     item.UpdatedAt,
 			Charge_area:   item.Charge_area,
 			Trans_area:    item.Trans_area,
 			Status:        item.Status,
@@ -114,7 +153,7 @@ func ToCarDto(car []model.Car) []CarDto {
 			Sample_id:     item.Sample_id,
 			Sample_code:   item.Sample_code,
 			Power:         item.Power,
-			Targe:         item.Targe,
+			Target:        item.Target,
 			Position:      item.Position,
 			Valid:         item.Valid,
 			Username:      item.Username,
@@ -124,3 +163,59 @@ func ToCarDto(car []model.Car) []CarDto {
 	}
 	return result
 }
+
+func ToToyDto(toy []model.Toy) []ToyDto {
+	// for item := range car {
+	// }
+	var result []ToyDto
+	for _, item := range toy {
+		template := ToyDto{
+			Start_time: item.Start_time,
+			End_time:   item.End_time,
+			Toy_id:     item.Toy_id,
+			CreatedAt:  item.CreatedAt,
+			UpdatedAt:  item.UpdatedAt,
+			Position_x: item.Position_x,
+			Position_y: item.Position_y,
+			Default:    item.Default,
+			Color:      item.Color,
+		}
+		result = append(result, template)
+	}
+	return result
+}
+
+/*
+func ToColumnDto(car []model.Car) []CarDto {
+	// for item := range car {
+	// }
+	var result []CarDto
+	for _, item := range car {
+		template := CarDto{
+			Start_time:    item.Start_time,
+			End_time:      item.End_time,
+			Car_name:      item.Car_name,
+			Car_id:        item.Car_id,
+			Car_type:      item.Car_type,
+			Sample_status: item.Sample_status,
+			CreatedAt:     item.CreatedAt,
+			UpdatedAt:     item.UpdatedAt,
+			Charge_area:   item.Charge_area,
+			Trans_area:    item.Trans_area,
+			Status:        item.Status,
+			Sample_name:   item.Sample_name,
+			Sample_type:   item.Sample_type,
+			Sample_id:     item.Sample_id,
+			Sample_code:   item.Sample_code,
+			Power:         item.Power,
+			Target:        item.Target,
+			Position:      item.Position,
+			Valid:         item.Valid,
+			Username:      item.Username,
+			Controller_id: item.Controller_id,
+		}
+		result = append(result, template)
+	}
+	return result
+}
+*/
